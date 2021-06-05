@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.fa {
+  margin-right: 16px;
+  margin-left: 8px;
+}
+
+.logo {
+  margin-left: 16px;
+  font-family: 'Limelight', cursive;
+  color: #fbb72c;
+}
+
+.info a {
+  color: gray;
+}
+
+.info a:hover {
+  color: #fbb72c;
+  transition: .3s;
+}
+
