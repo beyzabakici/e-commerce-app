@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './ProductCard.css';
+import { ProductContext } from '../../App';
 
 export default function ProductCard({product}){
+
+	const context = useContext(ProductContext);
+
   return(
     <div className="product-card">
 		<div className="product-tumb">
@@ -14,8 +18,8 @@ export default function ProductCard({product}){
 			<div className="product-bottom-details">
 				<div className="product-price">${product.price}</div>
 				<div className="product-links">
-					<a href=""><i className="fa fa-heart"></i></a>
-					<a href=""><i className="fa fa-shopping-cart"></i></a>
+					<button onClick={() => console.log('kalp') }><i className="fa fa-heart"></i></button>
+					<button onClick={() => context.addToCart(product) }><i className="fa fa-shopping-cart"></i></button>
 				</div>
 			</div>
 		</div>
