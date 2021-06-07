@@ -13,7 +13,6 @@ function App() {
   const [products, setProducts] = useState([]);
 
   const [contextState, setContextState] = useState({
-    products: [],
     favories: [],
     cart: [],
   })
@@ -21,26 +20,17 @@ function App() {
   useEffect(() => {
     api.get('/products').then(({ data }) => {
       setProducts(data);
-      setContextState({ products: data })
     })
   }, []);
 
-  const addToCart = (item) => {
-    setContextState(...contextState, {
-      cart: contextState.cart.find(cartItem => cartItem.id === item.id)
-        ? contextState.cart.map(cartItem => cartItem.id === item.id ? { ...cartItem, count: cartItem.count + 1 } : cartItem)
-        : [...contextState.cart, { ...item, count: 1 }]
-    })
-  }
-
   return (
-    <ProductContext.Provider value={{ state: contextState, addToCart }}>
+    <ProductContext.Provider value={{ state: contextState, setContextState }}>
       <div className="App">
         <Navbar />
         <Route exact path="/">
           <div className='card-container'>
             {products.map((product) => {
-              return <ProductCard key={product.id} product={product} />
+              return <ProductCard key={product.id} product={product}  />
             })}
           </div>
         </Route>

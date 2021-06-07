@@ -116,3 +116,20 @@ a
 .product-links a:hover {
     color: #fbb72c;
 }
+
+.product-links button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: gray;
+}
+
+button.yellow {
+    color: #fbb72c;
+}
+
+.product-card .fa-times {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
