@@ -5,14 +5,26 @@ import { ProductContext } from '../../App';
 export default function ProductCard({product, showDropButtons}){
 
 	const context = useContext(ProductContext);
-	const [ hasItem, setHasItem ] = useState(false);
+	const [ hasCartItem, setHasCartItem ] = useState(false);
+	const [ hasFavItem, setHasFavItem ] = useState(false);
+
 	useEffect(() => {
-		const findProduct = context.state.favories.find((item) => item.id === product.id);
+		const findFavProduct = context.state.favories.find((item) => item.id === product.id);
+		const findCartProduct = context.state.cart.find((item) => item.id === product.id);
 		
-		if (findProduct) {
-			setHasItem(true);
+		if (findFavProduct && findCartProduct) {
+			setHasFavItem(true)
+			setHasCartItem(true)
 		}
-	}, [context.state.favories]);
+		else if (findFavProduct) {
+			setHasFavItem(true)
+		}
+		else if (findCartProduct) {
+			setHasCartItem(true)
+		}
+		
+		
+	}, [context.state.favories, context.state.cart]);
 
   const addToCart = () => {
 		const findProduct = context.state.cart.find((item) => item.id === product.id);
@@ -48,8 +60,8 @@ export default function ProductCard({product, showDropButtons}){
 		if (!showDropButtons) {
 			return (
 			<>
-				<button className={hasItem ? 'yellow' : 'gray' } onClick={() => addToFav() }><i className="fa fa-heart"></i></button>
-				<button className={hasItem ? 'yellow' : 'gray' } onClick={() => addToCart() }><i className="fa fa-shopping-cart"></i></button>
+				<button className={hasFavItem ? 'isSelect' : 'notSelect' } onClick={() => addToFav() }><i className="fa fa-heart"></i></button>
+				<button className={hasCartItem ? 'isSelect' : 'notSelect' } onClick={() => addToCart() }><i className="fa fa-shopping-cart"></i></button>
 			</>
 			)
 		}

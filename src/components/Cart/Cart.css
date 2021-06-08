@@ -1,0 +1,15 @@
+.cart-container .product-card {
+  display: flex;
+  max-width: 800px;
+  width: 100%;
+}
+
+.cart-container .product-card .product-tumb {
+  padding: 0;
+} 
+
+.title {
+  margin-top: 20px;
+  font-family: 'Limelight', cursive;
+  color: gray;
+}
