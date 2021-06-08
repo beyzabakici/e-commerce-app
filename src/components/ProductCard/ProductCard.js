@@ -21,8 +21,7 @@ export default function ProductCard({product, showDropButtons}){
 		}
 		else if (findCartProduct) {
 			setHasCartItem(true)
-		}
-		
+		}	
 		
 	}, [context.state.favories, context.state.cart]);
 
@@ -76,7 +75,7 @@ export default function ProductCard({product, showDropButtons}){
 		</div>
 		<div className="product-details">
 			<span className="product-catagory">{product.category}</span>
-			<h4><a href="">{product.name}</a></h4>
+			<h4>{product.name}</h4>
 			<p>{product.description}</p>
 			<div className="product-bottom-details">
 				<div className="product-price">${product.price}</div>
