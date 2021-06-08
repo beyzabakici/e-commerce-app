@@ -29,9 +29,9 @@ function App() {
         <Navbar />
         <Route exact path="/">
           <div className='card-container'>
-            {products.map((product) => {
+            {products.length ? (products.map((product) => {
               return <ProductCard key={product.id} product={product}  />
-            })}
+            })) : null}
           </div>
         </Route>
         <Route path="/favories" component={Favories} />

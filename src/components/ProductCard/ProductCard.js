@@ -2,28 +2,25 @@ import React, {useContext, useEffect, useState} from 'react';
 import './ProductCard.css';
 import { ProductContext } from '../../App';
 
-export default function ProductCard({product, showDropButtons}){
+export default function ProductCard({product, showDropButtons, isCartPage }){
 
 	const context = useContext(ProductContext);
 	const [ hasCartItem, setHasCartItem ] = useState(false);
 	const [ hasFavItem, setHasFavItem ] = useState(false);
 
 	useEffect(() => {
-		const findFavProduct = context.state.favories.find((item) => item.id === product.id);
-		const findCartProduct = context.state.cart.find((item) => item.id === product.id);
+		const findFavProduct = context.state.favories.find((item) => item.id === product.id || '' );
+		const findCartProduct = context.state.cart.find((item) => item.id === product.id || '');
 		
-		if (findFavProduct && findCartProduct) {
-			setHasFavItem(true)
-			setHasCartItem(true)
+		if (findFavProduct) {
+			setHasFavItem(true);
 		}
-		else if (findFavProduct) {
-			setHasFavItem(true)
+
+		if (findCartProduct) {
+			setHasCartItem(true);
 		}
-		else if (findCartProduct) {
-			setHasCartItem(true)
-		}	
 		
-	}, [context.state.favories, context.state.cart]);
+	}, [context.state.favories, context.state.cart, product]);
 
   const addToCart = () => {
 		const findProduct = context.state.cart.find((item) => item.id === product.id);
@@ -48,10 +45,11 @@ export default function ProductCard({product, showDropButtons}){
   }
 
 	const handleRemoveItem = () => {
-		const arr = context.state.favories.filter((item) => item.id !== product.id );
+		const keyword = isCartPage ? 'cart' : 'favories' ;
+		const filterArray = context.state[keyword].filter((item) => item.id !== product.id );
 		context.setContextState({
 			...context.state,
-			favories : arr,
+			[keyword] : filterArray,
 		})
 	}
 
